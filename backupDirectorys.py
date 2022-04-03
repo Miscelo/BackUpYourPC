@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
 
-#import os
-
-
 #list of all folders that will be backuped.
 backupfolders = ['/home/[user]/Documents', '/home/[user]/pro']
 
@@ -12,4 +9,4 @@ def checkPathExists():
     pass
 
 if __name__ == '__main__':
-    checkPathExists():
+    checkPathExists()
