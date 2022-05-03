@@ -8,7 +8,7 @@ import os
 import csv
 import logging
 
-
+# This files will be create starting this script. Just backupfile will be created in a function when needed.
 logfile = "../data/backup.log"
 backupfile = "../data/backupfolders.csv"
 path_id_file = "../data/path_id"
@@ -41,6 +41,7 @@ def print_menu(menu):
         print("\t({}) {}".format(menu_key, menu_text))
 
 
+# Function will check if the input from keyboad of the user is a key of the "menu"-Dictionary
 def valid_item(userinput, menu):
     return userinput in menu.keys()
 
@@ -49,7 +50,7 @@ def get_item():
     letter = input("\tYour choice: ")
     return letter
 
-
+# Whis this functino, the user can choose with a key different functions.
 def choose_item(menu):
     letter = "notvalid"
     while not valid_item(letter, menu):
@@ -78,6 +79,8 @@ def choose_item(menu):
             print_menu(menu)
         return letter
 
+# Every file has a starting Value.
+# Later, before starting backup, we will use this values for checking the configuration.
 def create_Configfiles(path_id_file, email_file, destination_file):
     try:
         with open(path_id_file, "x") as file:
@@ -109,10 +112,12 @@ def raise_pathID(path_id):
     with open("../data/path_id", "w") as file:
         file.write(str(path_int))    
 
-
+# Write an ID and userinput to
 def add_newFolder(backupfile):
     path_id = read_configFile("../data/path_id")
     backuppath = input("\tPlease write full path for your backup- folder or (Q)uit! ")
+    if not os.path.exists(backuppath):
+        print("\n\tInfo: Path " + backuppath + " does not exist or check rights for reading!")
     if(backuppath != "Q"):
         path_dic = [{"id": path_id, "path": backuppath}]
         keys = ["id", "path"]
